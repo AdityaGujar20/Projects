@@ -10,7 +10,12 @@ import os
 
 # Load pre-trained model and encoder
 MODEL_PATH = "speech_emotion_detection_model.h5"
-model = load_model(MODEL_PATH)
+
+try:
+    model = load_model(MODEL_PATH)
+except Exception as e:
+    st.error(f"Error loading the model: {e}")
+    st.stop()
 
 # Emotion categories
 emotions = ['angry', 'calm', 'disgust', 'fear', 'happy', 'neutral', 'sad', 'surprise']
@@ -37,7 +42,6 @@ def predict_emotion(file_path):
     predicted_emotion = encoder.inverse_transform(predicted_one_hot)
     return predicted_emotion[0][0], np.max(prediction)
 
-
 def display_waveform(file_path):
     """Display waveform of the audio file."""
     y, sr = librosa.load(file_path, sr=None)
@@ -54,8 +58,6 @@ st.title("🎙️ Speech Emotion Detection")
 st.markdown("Detect emotions from speech audio files with a cutting-edge LSTM model!")
 
 st.sidebar.title("Upload an audio file")
-# st.sidebar.markdown("Upload an audio file below:")
-
 audio_file = st.sidebar.file_uploader("", type=["wav", "mp3"])
 
 if audio_file is not None:
