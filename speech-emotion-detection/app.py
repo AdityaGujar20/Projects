@@ -85,4 +85,4 @@ if audio_file is not None:
     os.remove(file_path)
 
 st.sidebar.markdown("---")
-st.sidebar.markdown("**About**: This app uses a deep learning LSTM model to detect emotions in speech audio files. Developed by Aditya Gujar and team.")
+st.sidebar.markdown("**About**: This app uses a deep learning LSTM model to detect emotions in speech audio files. Developed by 1MSCAIM.")
